@@ -12,6 +12,8 @@ if (!in_array($_POST['area'],['葛飾区','足立区','新宿区','荒川区','�
     echo nl2br('公園の場所は葛飾区,足立区,新宿区,荒川区,杉並区のいずれかを選択してください' . PHP_EOL);
 endif;
 
+var_export($_POST['area']);
+
 
 ?>
 
@@ -47,16 +49,15 @@ endif;
         </div>
 
         <div>
-            <label>景観</label>
-            <input type="checkbox" name="test" id="test1">
-            <label for="test1">きたない</label>
-            <input type="checkbox" name="test" id="test2">
-            <label for="test2">しぶい</label>
-            <input type="checkbox" name="test" id="test3">
-            <label for="test3">ふつう</label>
-            <input type="checkbox" name="test" id="test5">
-            <label for="test5">きれい</label>
+            <label for="view">景観</label>
+            <select name="view" id="view">
+                <option value="なつかしい">なつかしい</option>
+                <option value="ふつう">ふつう</option>
+                <option value="きれい">きれい</option>
+            </select>
         </div>
+
+
 
         <div>
             <label>大きさ</label>
