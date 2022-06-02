@@ -75,7 +75,7 @@
         </div>
 
         <br>
-        <input type="button" value="登録">
+        <input type="submit" value="登録">
     </form>
     <a href="index.php" style="margin: 0 120px;">検索ページへ</a>
     <a href="list.php" style="margin: 0 120px;">一覧ページへ</a>
