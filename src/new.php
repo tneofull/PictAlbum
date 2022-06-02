@@ -1,3 +1,20 @@
+<?php
+
+// 名前のチェック
+if (empty($_POST['name'])) :
+    echo nl2br('公園名を入力してください' . PHP_EOL);
+elseif (mb_strlen($_POST['name']) > 30) :
+    echo nl2br('公園名は30文字以内で入力してください' . PHP_EOL);
+endif;
+
+// 場所のチェック
+if (!in_array($_POST['area'],['葛飾区','足立区','新宿区','荒川区','杉並区'],true)) :
+    echo nl2br('公園の場所は葛飾区,足立区,新宿区,荒川区,杉並区のいずれかを選択してください' . PHP_EOL);
+endif;
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
