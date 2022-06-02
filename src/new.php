@@ -2,9 +2,9 @@
 
 // 公園の名前のチェック
 if (empty($_POST['name'])) :
-    echo nl2br('公園名を入力してください' . PHP_EOL);
+    echo nl2br('公園の名前を入力してください' . PHP_EOL);
 elseif (mb_strlen($_POST['name']) > 30) :
-    echo nl2br('公園名は30文字以内で入力してください' . PHP_EOL);
+    echo nl2br('公園の名前は30文字以内で入力してください' . PHP_EOL);
 endif;
 
 // 場所のチェック
@@ -34,7 +34,6 @@ elseif (mb_strlen($_POST['comment']) > 1000) :
     echo nl2br('感想は1000文字以内で入力してください' . PHP_EOL);
 endif;
 
-var_dump($_POST['comment']);
 
 
 ?>
@@ -74,7 +73,7 @@ var_dump($_POST['comment']);
             <label for="view">景観</label>
             <select name="view" id="view">
                 <option value="なつかしい">なつかしい</option>
-                <option value="ふつう">ふつう</option>
+                <option value="ふつう" selected>ふつう</option>
                 <option value="きれい">きれい</option>
             </select>
         </div>
@@ -86,7 +85,7 @@ var_dump($_POST['comment']);
             <input type="radio" name="size" id="size1" value="small">
             <label for="size1">small</label>
 
-            <input type="radio" name="size" id="size2" value="medium">
+            <input type="radio" name="size" id="size2" value="medium" checked>
             <label for="size2">medium</label>
 
             <input type="radio" name="size" id="size3" value="large">
