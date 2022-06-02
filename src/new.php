@@ -11,10 +11,10 @@
     <header>
         <h1>PhotoAlbum</h1>
     </header>
-    <form action="create.php" method="post">
+    <form action="new.php" method="post">
         <div>
             <label for="name">公園の名前</label>
-            <input type="text" id="name">
+            <input type="text" id="name" name="name">
         </div>
 
 
