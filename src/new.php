@@ -11,7 +11,7 @@
     <header>
         <h1>PhotoAlbum</h1>
     </header>
-    <form action="">
+    <form action="create.php" method="post">
         <div>
             <label for="name">公園の名前</label>
             <input type="text" id="name">
