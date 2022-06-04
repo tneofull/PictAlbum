@@ -1,38 +1,49 @@
 <?php
 
-// 公園の名前のチェック
-if (empty($_POST['name'])) :
-    echo nl2br('公園の名前を入力してください' . PHP_EOL);
-elseif (mb_strlen($_POST['name']) > 30) :
-    echo nl2br('公園の名前は30文字以内で入力してください' . PHP_EOL);
-endif;
+function validate()
+{
+    // 公園の名前のチェック
+    if (empty($_POST['name'])) :
+        echo nl2br('公園の名前を入力してください' . PHP_EOL);
+    elseif (mb_strlen($_POST['name']) > 30) :
+        echo nl2br('公園の名前は30文字以内で入力してください' . PHP_EOL);
+    endif;
 
-// 場所のチェック
-if (!in_array($_POST['area'],['葛飾区','足立区','新宿区','荒川区','杉並区'],true)) :
-    echo nl2br('公園の場所は"葛飾区","足立区","新宿区","荒川区","杉並区"のいずれかを選択してください' . PHP_EOL);
-endif;
+    // 場所のチェック
+    if (!in_array($_POST['area'], ['葛飾区', '足立区', '新宿区', '荒川区', '杉並区'], true)) :
+        echo nl2br('公園の場所は"葛飾区","足立区","新宿区","荒川区","杉並区"のいずれかを選択してください' . PHP_EOL);
+    endif;
 
-// 景観のチェック
-if (!in_array($_POST['view'], ['なつかしい', 'ふつう', 'きれい'], true)) :
-    echo nl2br('景観は、"なつかしい","ふつう","きれい"のいずれかを選択してください' . PHP_EOL);
-endif;
+    // 景観のチェック
+    if (!in_array($_POST['view'], ['なつかしい', 'ふつう', 'きれい'], true)) :
+        echo nl2br('景観は、"なつかしい","ふつう","きれい"のいずれかを選択してください' . PHP_EOL);
+    endif;
 
-// 大きさのチェック
-if (!in_array($_POST['size'], ['small', 'medium', 'large'], true)) :
-    echo nl2br('大きさは、"small","medium","large"のいずれかを選択してください' . PHP_EOL);
-endif;
+    // 大きさのチェック
+    if (!in_array($_POST['size'], ['small', 'medium', 'large'], true)) :
+        echo nl2br('大きさは、"small","medium","large"のいずれかを選択してください' . PHP_EOL);
+    endif;
 
-// 総合評価のチェック
-if ((int)$_POST['score'] <= 0 || (int)$_POST['score'] >= 6) :
-    echo nl2br('総合評価は、1以上5以下の整数を選択してください' . PHP_EOL);
-endif;
+    // 総合評価のチェック
+    if ((int)$_POST['score'] <= 0 || (int)$_POST['score'] >= 6) :
+        echo nl2br('総合評価は、1以上5以下の整数を選択してください' . PHP_EOL);
+    endif;
 
-// 感想のチェック
-if (empty($_POST['comment'])) :
-    echo nl2br('感想を入力してください' . PHP_EOL);
-elseif (mb_strlen($_POST['comment']) > 1000) :
-    echo nl2br('感想は1000文字以内で入力してください' . PHP_EOL);
-endif;
+    // 感想のチェック
+    if (empty($_POST['comment'])) :
+        echo nl2br('感想を入力してください' . PHP_EOL);
+    elseif (mb_strlen($_POST['comment']) > 1000) :
+        echo nl2br('感想は1000文字以内で入力してください' . PHP_EOL);
+    endif;
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+    validate();
+
+}
+
+
 
 
 
