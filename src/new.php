@@ -1,5 +1,7 @@
 <?php
 
+require_once('dbConnection.php');
+
 function validate()
 {
     // 公園の名前のチェック
@@ -37,15 +39,48 @@ function validate()
     endif;
 }
 
+function insertTable($link)
+{
+    $sql = <<<EOT
+    INSERT INTO parks (
+    name,
+    area,
+    view,
+    size,
+    score,
+    comment
+    ) VALUES (
+    '{$_POST['name']}',
+    '{$_POST['area']}',
+    '{$_POST['view']}',
+    '{$_POST['size']}',
+    '{$_POST['score']}',
+    '{$_POST['comment']}'
+    )
+EOT;
 
-if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    validate();
-
+    if ($result = mysqli_query($link, $sql)) {
+        echo 'データの挿入に成功しました' . PHP_EOL;
+    } else {
+        echo 'Error: データの挿入に失敗しました' . PHP_EOL;
+        echo 'Debugging Error: ' . mysqli_error($link) . PHP_EOL;
+        var_dump($result);
+    }
 }
 
 
-
-
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+    validate();
+    $link = dbConnection();
+    insertTable($link);
+    // データベース切断 ここも関数に切り出す?
+    if (mysqli_close($link)) {
+        echo 'データベース接続を切断しました' . PHP_EOL;
+    } else {
+        echo 'Error: データベース接続の切断に失敗しました' . PHP_EOL;
+        echo 'Debugging Error: ' . mysqli_error($link) . PHP_EOL;
+    }
+}
 
 ?>
 
