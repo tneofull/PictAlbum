@@ -4,39 +4,41 @@ require_once('dbConnection.php');
 
 function validate()
 {
+    $errors = [];
     // 公園の名前のチェック
     if (empty($_POST['name'])) :
-        echo nl2br('公園の名前を入力してください' . PHP_EOL);
-    elseif (mb_strlen($_POST['name']) > 30) :
-        echo nl2br('公園の名前は30文字以内で入力してください' . PHP_EOL);
+        $errors[] = '公園の名前を入力してください';
+    elseif (mb_strlen($_POST['name']) > 100) :
+        $errors[] = '公園の名前は100文字以内で入力してください';
     endif;
 
     // 場所のチェック
     if (!in_array($_POST['area'], ['葛飾区', '足立区', '新宿区', '荒川区', '杉並区'], true)) :
-        echo nl2br('公園の場所は"葛飾区","足立区","新宿区","荒川区","杉並区"のいずれかを選択してください' . PHP_EOL);
+        $errors[] = '公園の場所は"葛飾区","足立区","新宿区","荒川区","杉並区"のいずれかを選択してください';
     endif;
 
     // 景観のチェック
     if (!in_array($_POST['view'], ['なつかしい', 'ふつう', 'きれい'], true)) :
-        echo nl2br('景観は、"なつかしい","ふつう","きれい"のいずれかを選択してください' . PHP_EOL);
+        $errors[] = '景観は、"なつかしい","ふつう","きれい"のいずれかを選択してください';
     endif;
 
     // 大きさのチェック
     if (!in_array($_POST['size'], ['small', 'medium', 'large'], true)) :
-        echo nl2br('大きさは、"small","medium","large"のいずれかを選択してください' . PHP_EOL);
+        $errors[] = '大きさは、"small","medium","large"のいずれかを選択してください';
     endif;
 
     // 総合評価のチェック
     if ((int)$_POST['score'] <= 0 || (int)$_POST['score'] >= 6) :
-        echo nl2br('総合評価は、1以上5以下の整数を選択してください' . PHP_EOL);
+        $errors[] = '総合評価は、1以上5以下の整数を選択してください';
     endif;
 
     // 感想のチェック
     if (empty($_POST['comment'])) :
-        echo nl2br('感想を入力してください' . PHP_EOL);
+        $errors[] = '感想を入力してください';
     elseif (mb_strlen($_POST['comment']) > 1000) :
-        echo nl2br('感想は1000文字以内で入力してください' . PHP_EOL);
+        $errors[] = '感想は1000文字以内で入力してください';
     endif;
+    return $errors;
 }
 
 function insertTable($link)
@@ -50,37 +52,44 @@ function insertTable($link)
     score,
     comment
     ) VALUES (
-    '{$_POST['name']}',
-    '{$_POST['area']}',
-    '{$_POST['view']}',
-    '{$_POST['size']}',
-    '{$_POST['score']}',
-    '{$_POST['comment']}'
+    "{$_POST['name']}",
+    "{$_POST['area']}",
+    "{$_POST['view']}",
+    "{$_POST['size']}",
+    "{$_POST['score']}",
+    "{$_POST['comment']}"
     )
 EOT;
 
-    if ($result = mysqli_query($link, $sql)) {
+    if (mysqli_query($link, $sql)) {
         echo 'データの挿入に成功しました' . PHP_EOL;
     } else {
         echo 'Error: データの挿入に失敗しました' . PHP_EOL;
         echo 'Debugging Error: ' . mysqli_error($link) . PHP_EOL;
-        var_dump($result);
     }
 }
 
+// POST送信されたときのみ処理していく
+if ($_SERVER["REQUEST_METHOD"] === 'POST'):
+    $errors = validate();
 
-if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    validate();
-    $link = dbConnection();
-    insertTable($link);
-    // データベース切断 ここも関数に切り出す?
-    if (mysqli_close($link)) {
-        echo 'データベース接続を切断しました' . PHP_EOL;
-    } else {
-        echo 'Error: データベース接続の切断に失敗しました' . PHP_EOL;
-        echo 'Debugging Error: ' . mysqli_error($link) . PHP_EOL;
-    }
-}
+    if (count($errors) > 0):
+        foreach ($errors as $error):
+            echo nl2br($error . PHP_EOL);
+        endforeach;
+    else: //$errorsの要素がない=エラーがない場合のみ下記処理する
+        $link = dbConnection();
+        insertTable($link);
+
+        // データベース切断 ここも関数に切り出す?
+        if (mysqli_close($link)):
+            echo 'データベース接続を切断しました' . PHP_EOL;
+        else:
+            echo 'Error: データベース接続の切断に失敗しました' . PHP_EOL;
+            echo 'Debugging Error: ' . mysqli_error($link) . PHP_EOL;
+        endif;
+    endif;
+endif;
 
 ?>
 
