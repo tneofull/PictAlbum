@@ -1,3 +1,49 @@
+<?php
+
+require_once('dbConnection.php');
+
+function selectTable($link)
+{
+    $sql = <<<EOT
+    SELECT
+    id,
+    name,
+    area,
+    view,
+    size,
+    score,
+    comment
+    FROM parks
+EOT;
+
+    if ($result = mysqli_query($link, $sql)):
+        echo 'データの取得に成功しました' . PHP_EOL;
+        $parks = [];
+        while ($row = mysqli_fetch_assoc($result)):
+            $parks[] = $row;
+        endwhile;
+        // var_dump($parks);
+        return $parks;
+    else:
+        echo 'Error: データの取得に失敗しました' . PHP_EOL;
+        echo 'Debugging Error: ' . mysqli_error($link) . PHP_EOL;
+    endif;
+}
+
+$link = dbConnection();
+$parks = selectTable($link);
+
+foreach ($parks as $park):
+    echo $park['name'] . PHP_EOL;
+    echo $park['area'] . PHP_EOL;
+    echo $park['view'] . PHP_EOL;
+    echo $park['size'] . PHP_EOL;
+    echo $park['score'] . PHP_EOL;
+    echo $park['comment'] . PHP_EOL;
+endforeach;
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
