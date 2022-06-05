@@ -5,7 +5,7 @@ require_once ('dbConnection.php');
 // テーブルを初期化する
 function dropTable($link)
 {
-    $sql = 'DROP TABLE IF EXISTS PARKS';
+    $sql = 'DROP TABLE IF EXISTS parks';
     if (mysqli_query($link, $sql)) {
         echo 'テーブルを初期化しました' . PHP_EOL;
     } else {
