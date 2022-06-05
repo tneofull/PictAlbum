@@ -1,9 +1,3 @@
-<?php
-
-require_once __DIR__ . '/layout.php';
-
-?>
-
 <form action="new.php" method="post">
         <div>
             <label for="name">公園の名前</label>
@@ -71,9 +65,3 @@ require_once __DIR__ . '/layout.php';
     </form>
     <a href="index.php" style="margin: 0 120px;">検索ページへ</a>
     <a href="list.php" style="margin: 0 120px;">一覧ページへ</a>
-
-
-
-</body>
-
-</html>

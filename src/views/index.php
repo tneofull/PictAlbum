@@ -1,8 +1,3 @@
-<?php
-
-require_once __DIR__ . '/layout.php';
-
-?>
 <p>公園の所在地</p>
 <form action="">
     <input type="checkbox" name="test" id="test1">
@@ -19,10 +14,4 @@ require_once __DIR__ . '/layout.php';
     <input type="button" value="検索">
 </form>
 <p>↓↓↓新規で画像登録する場合はこちらへ↓↓↓</p>
-<a href="new.php" style="margin: 0 120px;">登録ページへ</a>
-
-
-
-</body>
-
-</html>
+<a href="/new.php" style="margin: 0 120px;">登録ページへ</a>
