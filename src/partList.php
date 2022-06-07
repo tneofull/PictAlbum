@@ -1,41 +1,47 @@
 <?php
 
 require_once('dbConnection.php');
-var_dump($_POST['area']);
-// foreach ($_POST['area'] as $area):
-//     echo $area . PHP_EOL;
-// endforeach;
-// $count = count($_POST['area']);
 
-// for ($i = 0; $i < $count; $i++)
-// echo ($_POST['area'][$i] . PHP_EOL);
-
-
-function selectTable($link)
-{
-    $array = implode(",", $_POST['area']);
-    var_dump($array);
-
-    $sql = <<<EOT
-    SELECT
-    id,
-    name,
-    area,
-    view,
-    size,
-    score,
-    comment
-    FROM parks
-    WHERE area IN ("{$_POST['area'][0]}","{$_POST['area'][1]}")
-EOT;
-
-//方針1
-// 途中までは、末尾に,を含めた出力にし、一番最後だけ末尾の,を除くとする。
-// なお判定は今何番目なのかと、全要素数から判定する
 
 // 方針2
 // area = '葛飾区'というのをかたまりととらえ後4セット分を条件で、同じ配列にどんどん格納していく。
-// それをimplodeにて、ANDでのりづけしたものを、where句の後ろ部分として完成させる
+// それをimplodeにて、ORでのりづけしたものを、where句の後ろ部分として完成させる
+// $where = implode("OR", "area = '". $_POST['area'] . "'");
+// var_dump($where);
+
+
+    function selectTable($link)
+    {
+        $count = count($_POST['area']);
+        var_dump($count);
+
+        $where = 'WHERE ';
+        for ($i = 0; $i < $count; $i++) :
+            if ($i < $count - 1) :
+                $where .= "area = '" . $_POST['area'][$i] . "' OR ";
+                elseif ($i == $count - 1) :
+                    $where .= "area = '" . $_POST['area'][$i] . "'";
+                endif;
+            endfor;
+            echo $where;
+
+        $sql = <<<EOT
+        SELECT
+        id,
+        name,
+        area,
+        view,
+        size,
+        score,
+        comment
+        FROM parks
+        {$where}
+        EOT;
+
+        // WHERE area IN ("{$_POST['area'][0]}","{$_POST['area'][1]}")
+        // WHERE area = '葛飾区' OR area = '足立区' OR area = '荒川区'
+
+
 
 
     if ($result = mysqli_query($link, $sql)) :
