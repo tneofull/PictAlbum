@@ -1,17 +1,17 @@
 <p>公園の所在地</p>
-<form action="">
-    <input type="checkbox" name="test" id="test1">
-    <label for="test1">葛飾区</label>
-    <input type="checkbox" name="test" id="test2">
-    <label for="test2">足立区</label>
-    <input type="checkbox" name="test" id="test3">
-    <label for="test3">荒川区</label>
-    <input type="checkbox" name="test" id="test5">
-    <label for="test5">新宿区</label>
-    <input type="checkbox" name="test" id="test4">
-    <label for="test4">杉並区</label>
+<form action="/partList.php" method="post">
+    <input type="checkbox" name="area[]" id="area1" value="葛飾区">
+    <label for="area1">葛飾区</label>
+    <input type="checkbox" name="area[]" id="area2" value="足立区">
+    <label for="area2">足立区</label>
+    <input type="checkbox" name="area[]" id="area3" value="荒川区">
+    <label for="area3">荒川区</label>
+    <input type="checkbox" name="area[]" id="area4" value="新宿区">
+    <label for="area4">新宿区</label>
+    <input type="checkbox" name="area[]" id="area5" value="杉並区">
+    <label for="area5">杉並区</label>
 
-    <input type="button" value="検索">
+    <input type="submit" value="検索">
 </form>
 <p>↓↓↓新規で画像登録する場合はこちらへ↓↓↓</p>
 <a href="/new.php" style="margin: 0 120px;">登録ページへ</a>
