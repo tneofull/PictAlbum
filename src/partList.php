@@ -2,50 +2,33 @@
 
 require_once('dbConnection.php');
 
+function selectTable($link)
+{
 
-// 方針2
-// area = '葛飾区'というのをかたまりととらえ後4セット分を条件で、同じ配列にどんどん格納していく。
-// それをimplodeにて、ORでのりづけしたものを、where句の後ろ部分として完成させる
-// $where = implode("OR", "area = '". $_POST['area'] . "'");
-// var_dump($where);
+    // WHERE句の生成 やりかた1
+    // チェックボックスで2つ以上チェックされると、2個目以降の検索要素ではWHERE句にORが加わるようにする
+    // $where = 'WHERE ';
+    // $count = count($_POST['area']);
+    // for ($i = 0; $i < $count; $i++) :
+    //     if ($i !== 0) :
+    //         $where .= " OR ";
+    //     endif;
+    //     $where .= "area = '" . $_POST['area'][$i] . "'";
+    // endfor;
 
-
-    function selectTable($link)
-    {
-        $count = count($_POST['area']);
-        var_dump($count);
-
-        $where = 'WHERE ';
-
-        // WHERE句の生成
-        // チェックボックスで2つ以上チェックされて検索されるとWHERE句にORが加わるようにする
-        for ($i = 0; $i < $count; $i++) :
-            if ($i == 0) :
-                $where .= "area = '" . $_POST['area'][$i] . "'";
-            else:
-                $where .= " OR area = '" . $_POST['area'][$i] . "'";
-            endif;
-        endfor;
-            echo $where;
+    // WHERE句の生成 やりかた2
+    // 要素が1つならimplode関数は合体しないこともうまく利用し、
+    // 共通に現れてくる部分を見極めて複数要素を上手く合体してWHERE句を作成する
+    $where  = "WHERE area = '";
+    $where .= implode("' OR area = '", $_POST['area']) . "'";
 
         $sql = <<<EOT
         SELECT
-        id,
-        name,
-        area,
-        view,
-        size,
-        score,
-        comment
-        FROM parks
+            id,name,area,view,size,score,comment
+        FROM
+            parks
         {$where}
         EOT;
-
-        // WHERE area IN ("{$_POST['area'][0]}","{$_POST['area'][1]}")
-        // WHERE area = '葛飾区' OR area = '足立区' OR area = '荒川区'
-
-
-
 
     if ($result = mysqli_query($link, $sql)) :
         $parks = [];
