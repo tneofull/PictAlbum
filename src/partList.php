@@ -16,13 +16,16 @@ require_once('dbConnection.php');
         var_dump($count);
 
         $where = 'WHERE ';
+
+        // WHERE句の生成
+        // チェックボックスで2つ以上チェックされて検索されるとWHERE句にORが加わるようにする
         for ($i = 0; $i < $count; $i++) :
-            if ($i < $count - 1) :
-                $where .= "area = '" . $_POST['area'][$i] . "' OR ";
-                elseif ($i == $count - 1) :
-                    $where .= "area = '" . $_POST['area'][$i] . "'";
-                endif;
-            endfor;
+            if ($i == 0) :
+                $where .= "area = '" . $_POST['area'][$i] . "'";
+            else:
+                $where .= " OR area = '" . $_POST['area'][$i] . "'";
+            endif;
+        endfor;
             echo $where;
 
         $sql = <<<EOT
