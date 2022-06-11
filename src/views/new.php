@@ -1,4 +1,4 @@
-<form action="/new.php" method="post">
+<form action="/new.php" method="post" enctype="multipart/form-data">
     <div>
         <label for="name">公園の名前</label>
         <input type="text" id="name" name="name">
@@ -55,6 +55,11 @@
         <textarea name="comment" id="comment" cols="50" rows="5"></textarea>
     </div>
 
+    <div>
+        <label for="pict">画像</label>
+        <input type="file" name="pict" id="pict">
+        <!-- <input type="submit" value="アップロード"> 画像だけをまずアップロード後、全体を登録みたいなことももしかしたらできるのかもやけど、このボタンは削除とした-->
+    </div>
 
     <br>
     <input type="submit" value="登録">
@@ -62,13 +67,5 @@
 <br>
 <br>
 
-
-<form action="../upload.php" method="post" enctype="multipart/form-data">
-    <div>
-        <label for="pict">画像</label>
-        <input type="file" name="pict" id="pict">
-        <input type="submit" value="アップロード">
-    </div>
-</form>
 <a href="index.php" style="margin: 0 120px;">検索ページへ</a>
 <a href="list.php" style="margin: 0 120px;">一覧ページへ</a>
