@@ -38,6 +38,12 @@ function validate()
     elseif (mb_strlen($_POST['comment']) > 1000) :
         $errors[] = '感想は1000文字以内で入力してください';
     endif;
+
+
+    // 画像ファイルのチェック
+    require_once('upload.php');
+
+
     return $errors;
 }
 
@@ -82,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST'):
 
         // データベース切断
         if (mysqli_close($link)):
+            echo "データを登録しました。";
             include __DIR__ . '/list.php';//これでよいのかは正直わからんが、header関数使えないので妥当かな?
             exit;
         else:
