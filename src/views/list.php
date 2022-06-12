@@ -19,6 +19,9 @@
                 <div>
                     <p>感想: <?php echo $park['comment'] . PHP_EOL; ?><br></p>
                 </div>
+                <div>
+                    <img src="/img/<?php echo $park['pictname']; ?>" alt="">
+                </div>
             </li>
         </ul>
     <?php endforeach; ?>

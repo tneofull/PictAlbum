@@ -1,5 +1,6 @@
 <?php
 
+$filename = ""; //ある関数内部でも使用できるグローバル変数としたいために宣言しておく
 require_once('dbConnection.php');
 
 function validate()
@@ -43,12 +44,12 @@ function validate()
     // 画像ファイルのチェック
     require_once('upload.php');
 
-
     return $errors;
 }
 
 function insertTable($link)
 {
+    global $filename; //下記ではグローバル変数として使いたいのでこの宣言が必要
     $sql = <<<EOT
     INSERT INTO parks (
     name,
@@ -56,14 +57,16 @@ function insertTable($link)
     view,
     size,
     score,
-    comment
+    comment,
+    pictname
     ) VALUES (
     "{$_POST['name']}",
     "{$_POST['area']}",
     "{$_POST['view']}",
     "{$_POST['size']}",
     "{$_POST['score']}",
-    "{$_POST['comment']}"
+    "{$_POST['comment']}",
+    "{$filename}"
     )
 EOT;
 

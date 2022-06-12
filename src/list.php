@@ -12,7 +12,8 @@ function selectTable($link)
     view,
     size,
     score,
-    comment
+    comment,
+    pictname
     FROM parks
 EOT;
 

@@ -26,6 +26,7 @@ function createTable($link)
     size VARCHAR(10),
     score INT,
     comment VARCHAR(1000),
+    pictname VARCHAR(20),
     created_at TIMESTAMP
     )
 EOT;
