@@ -89,9 +89,9 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST'):
         $link = dbConnection();
         insertTable($link);
 
-        // データベース切断
+        // 登録完了&データベース切断
         if (mysqli_close($link)):
-            echo "データを登録しました。";
+            echo nl2br("データを登録しました。" . PHP_EOL);
             include __DIR__ . '/list.php';//これでよいのかは正直わからんが、header関数使えないので妥当かな?
             exit;
         else:

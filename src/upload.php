@@ -32,7 +32,7 @@ if (isset($_FILES['pict']['error']) && is_int($_FILES['pict']['error'])) :
         if (!count($errors) > 0) :
             $result = move_uploaded_file($originalFilename, $UploadDir);
             if ($result) :
-                echo 'ファイルをアップロードしました！';
+                echo nl2br('ファイルをアップロードしました！' . PHP_EOL);
             else :
                 $errors[] = 'ファイルのアップロードに失敗しました' . $_FILES['pict']['error'];
             endif;
@@ -43,8 +43,3 @@ if (isset($_FILES['pict']['error']) && is_int($_FILES['pict']['error'])) :
 else :
     $errors[] = "アップロードする画像ファイルが選択されていません";
 endif;
-
-?>
-
-<!-- 画像の表示テスト用であり、いつか消す -->
-<img src="/img/<?php echo $filename; ?>" alt="">
