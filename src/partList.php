@@ -25,7 +25,7 @@ function selectTable($link)
 
             $sql = <<<EOT
             SELECT
-                id,name,area,view,size,score,comment
+                id,name,area,view,size,score,comment,pictname
             FROM
                 parks
             {$where}
