@@ -3,10 +3,10 @@
             <li>
                 <div>
                     <div>
-                        <p>名前: <?php echo $park['name'] . PHP_EOL; ?></p>
+                        <p>公園の名前: <?php echo $park['name'] . PHP_EOL; ?></p>
                     </div>
                     <div>
-                        <p>場所: <?php echo $park['area'] . PHP_EOL; ?></p>
+                        <p>公園の場所: <?php echo $park['area'] . PHP_EOL; ?></p>
                     </div>
                     <div>
                         <p>景観: <?php echo $park['view'] . PHP_EOL; ?></p>
