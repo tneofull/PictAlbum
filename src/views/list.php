@@ -3,26 +3,26 @@
             <li>
                 <div>
                     <div>
-                        <p>公園の名前: <?php echo $park['name'] . PHP_EOL; ?></p>
+                        <p>公園の名前: <?php echo escape($park['name']); ?></p>
                     </div>
                     <div>
-                        <p>公園の場所: <?php echo $park['area'] . PHP_EOL; ?></p>
+                        <p>公園の場所: <?php echo escape($park['area']); ?></p>
                     </div>
                     <div>
-                        <p>景観: <?php echo $park['view'] . PHP_EOL; ?></p>
+                        <p>景観: <?php echo escape($park['view']); ?></p>
                     </div>
                     <div>
-                        <p>大きさ: <?php echo $park['size'] . PHP_EOL; ?></p>
+                        <p>大きさ: <?php echo escape($park['size']); ?></p>
                     </div>
                     <div>
-                        <p>総合評価: <?php echo $park['score'] . PHP_EOL; ?></p>
+                        <p>総合評価: <?php echo escape($park['score']); ?></p>
                     </div>
                     <div>
-                        <p>感想: <?php echo $park['comment'] . PHP_EOL; ?><br></p>
+                        <p>感想: <?php echo escape($park['comment']); ?><br></p>
                     </div>
                 </div>
                 <div>
-                    <img src="/img/<?php echo $park['pictname']; ?>" alt="">
+                    <img src="/img/<?php echo escape($park['pictname']); ?>" alt="">
                 </div>
             </li>
         </ul>

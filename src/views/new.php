@@ -1,7 +1,7 @@
 <form action="/new.php" method="post" enctype="multipart/form-data">
     <div>
         <label for="name">公園の名前</label>
-        <input type="text" id="name" name="name" value="<?php echo $review['name'] ? $review['name'] : ''; ?>">
+        <input type="text" id="name" name="name" value="<?php echo $review['name'] ? escape($review['name']) : ''; ?>">
     </div>
 
 

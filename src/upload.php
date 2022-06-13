@@ -17,6 +17,7 @@ if (isset($_FILES['pict']['error']) && is_int($_FILES['pict']['error'])) :
     // GIF,JPEG,PNG以外のファイル形式でアップロードされたら警告する(戻り値が1~3のいずれかならOK)
     $filetype = @exif_imagetype($_FILES['pict']['tmp_name']);
     if (in_array($filetype, [1, 2, 3], true)) :
+        // ランダムに8桁の16進数を生成し、元のファイルの拡張子と結合してファイル名を定義する
         $filename = bin2hex(openssl_random_pseudo_bytes(4)) . image_type_to_extension($filetype);
         $originalFilename = $_FILES['pict']['tmp_name'];
         $UploadDir = __DIR__ . '/img/' . $filename;
