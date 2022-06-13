@@ -1,6 +1,8 @@
 <?php
 
 require_once('dbConnection.php');
+require_once('escape.php');
+
 
 function selectTable($link)
 {
